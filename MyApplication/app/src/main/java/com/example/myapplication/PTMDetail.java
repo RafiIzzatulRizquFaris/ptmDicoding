@@ -23,9 +23,9 @@ public class PTMDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ptm_detail);
 
-        img = (ImageView)findViewById(R.id.logo2);
-        nmptm = (TextView)findViewById(R.id.nmptm2);
-        desc = (TextView)findViewById(R.id.desc2);
+        img = findViewById(R.id.logo2);
+        nmptm = findViewById(R.id.nmptm2);
+        desc = findViewById(R.id.desc2);
 
 
         Glide.with(this).load(getIntent().getIntExtra(LOGO,0)).into(img);

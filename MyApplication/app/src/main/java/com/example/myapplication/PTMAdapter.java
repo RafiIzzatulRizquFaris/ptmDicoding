@@ -1,18 +1,12 @@
 package com.example.myapplication;
 
-import android.content.Context;
-import android.content.Intent;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -24,7 +18,7 @@ public class PTMAdapter extends RecyclerView.Adapter<PTMAdapter.ListViewHolder> 
 
     private ArrayList<PTM> listPTM;
 
-    public PTMAdapter(ArrayList<PTM> list) {
+    PTMAdapter(ArrayList<PTM> list) {
         this.listPTM = list;
     }
 
@@ -32,7 +26,7 @@ public class PTMAdapter extends RecyclerView.Adapter<PTMAdapter.ListViewHolder> 
     private OnItemClickCallBack onItemClickCallBack;
 
 
-    public void setOnItemClickCallBack(OnItemClickCallBack onItemClickCallBack) {
+    void setOnItemClickCallBack(OnItemClickCallBack onItemClickCallBack) {
         this.onItemClickCallBack=onItemClickCallBack;
     }
 
@@ -47,7 +41,6 @@ public class PTMAdapter extends RecyclerView.Adapter<PTMAdapter.ListViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull final ListViewHolder holder, final int position) {
         PTM ptm = listPTM.get(position);
-        final Context mcontext = holder.itemView.getContext();
         Glide.with(holder.itemView.getContext())
                 .load(ptm.getImg())
                 .apply(new RequestOptions().override(55,55))
@@ -60,14 +53,6 @@ public class PTMAdapter extends RecyclerView.Adapter<PTMAdapter.ListViewHolder> 
                 onItemClickCallBack.onItemClicked(listPTM.get(holder.getAdapterPosition()));
             }
         });
-        holder.btnMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(mcontext, About.class);
-                mcontext.startActivity(i);
-            }
-        });
-
     }
 
     @Override
@@ -78,18 +63,16 @@ public class PTMAdapter extends RecyclerView.Adapter<PTMAdapter.ListViewHolder> 
 
 
 
-    public class ListViewHolder extends RecyclerView.ViewHolder {
+    static class ListViewHolder extends RecyclerView.ViewHolder {
         ImageView logoUniv;
         TextView nama,desc;
-        Button btnMenu;
 
-        public ListViewHolder(@NonNull View itemView) {
+        ListViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            logoUniv = (ImageView) itemView.findViewById(R.id.logoPtm);
-            nama = (TextView) itemView.findViewById(R.id.namaPtm);
-            desc = (TextView) itemView.findViewById(R.id.deskripsi);
-            btnMenu = (Button) itemView.findViewById(R.id.menu);
+            logoUniv = itemView.findViewById(R.id.logoPtm);
+            nama = itemView.findViewById(R.id.namaPtm);
+            desc = itemView.findViewById(R.id.deskripsi);
         }
     }
 
